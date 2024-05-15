@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: orangepilotserver
+  profiles:
+    active: dev

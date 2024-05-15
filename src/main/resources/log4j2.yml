@@ -1,0 +1,47 @@
+# 配置文件的根元素，定义了配置的名称
+Configuration:
+  # 定义全局属性
+  Properties:
+    Property:
+      - name: logPath # 定义一个属性，名为logPath，值为logs
+        value: logs
+
+  # 定义日志输出的目标（Appenders）
+  Appenders:
+    # 控制台输出配置
+    Console:
+      name: ConsoleAppender # 命名该Appender
+      target: SYSTEM_OUT # 输出到控制台
+      PatternLayout: # 使用模式布局
+        pattern: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" # 定义日志输出格式
+
+    # 滚动文件输出配置
+    RollingFile:
+      name: FileAppender # 命名该Appender
+      fileName: ${logPath}/app.log # 日志文件名，使用前面定义的logPath属性
+      filePattern: "${logPath}/app-%d{yyyy-MM-dd}.log" # 文件滚动后的命名规则，日期格式
+      PatternLayout: # 使用模式布局
+        pattern: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" # 同样的日志输出格式
+      Policies: # 定义触发滚动的策略
+        TimeBasedTriggeringPolicy: # 时间触发策略
+          interval: 1 # 每天滚动一次
+          count: 1 # 保留1个旧文件
+      DefaultRolloverStrategy: # 默认的滚动策略
+        max: 20 # 最多保留20个文件
+
+  # 定义日志记录器（Loggers）
+  Loggers:
+    # 根Logger，应用于所有未匹配的类
+    Root:
+      level: info # 设置根Logger的日志级别为info
+      AppenderRef: # 引用上面定义的Appenders
+        - ref: ConsoleAppender # 输出到控制台
+        - ref: FileAppender # 输出到文件
+
+    # 如果有特定的包需要特殊处理，可以定义一个Logger
+    Logger:
+      - name: com.example.myapp # 匹配com.example.myapp包及其子包
+        level: debug # 设置这个包的日志级别为debug
+        AppenderRef: # 引用上面定义的Appenders
+          - ref: ConsoleAppender # 输出到控制台
+          - ref: FileAppender # 输出到文件
