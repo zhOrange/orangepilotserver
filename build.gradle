@@ -32,14 +32,11 @@ dependencies {
 
     // 添加Knife4j依赖
     implementation("com.github.xiaoymin:knife4j-openapi3-jakarta-spring-boot-starter:4.4.0")
-    // 引入Springfox Swagger3核心依赖
-//    implementation 'io.springfox:springfox-boot-starter:3.0.0'
 
-    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui'
     // 添加Log4j2依赖
     implementation 'org.springframework.boot:spring-boot-starter-log4j2'
     // slf4j依赖
-//    implementation 'org.apache.logging.log4j:log4j-slf4j-impl'
+    implementation 'org.apache.logging.log4j:log4j-slf4j-impl'
     // Lombok依赖
     annotationProcessor 'org.projectlombok:lombok:1.18.30'
     implementation 'org.projectlombok:lombok:1.18.30'
