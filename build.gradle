@@ -17,23 +17,39 @@ repositories {
     }
     mavenCentral()
 }
-configurations {
-    all {
-        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
-    }
-}
+
 dependencies {
+
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.boot:spring-boot-starter'
+    configurations {
+        all {
+            exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+        }
+    }
+
+    // 添加Hutool依赖
+    implementation 'cn.hutool:hutool-all:5.8.26'
+
+    // 添加Knife4j依赖
+    implementation("com.github.xiaoymin:knife4j-openapi3-jakarta-spring-boot-starter:4.4.0")
+    // 引入Springfox Swagger3核心依赖
+//    implementation 'io.springfox:springfox-boot-starter:3.0.0'
+
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui'
     // 添加Log4j2依赖
     implementation 'org.springframework.boot:spring-boot-starter-log4j2'
+    // slf4j依赖
+//    implementation 'org.apache.logging.log4j:log4j-slf4j-impl'
     // Lombok依赖
-    annotationProcessor 'org.projectlombok:lombok:1.18.20'
-    implementation 'org.projectlombok:lombok:1.18.20'
+    annotationProcessor 'org.projectlombok:lombok:1.18.30'
+    implementation 'org.projectlombok:lombok:1.18.30'
 
     // MyBatisPlus依赖 及 MyBatisPlus代码生成器
     implementation 'com.baomidou:mybatis-plus-boot-starter:3.5.5'
     implementation 'com.baomidou:mybatis-plus-generator:3.5.6'
+
+    implementation 'mysql:mysql-connector-java:8.0.28'
+    implementation 'com.alibaba:druid-spring-boot-starter:1.2.16'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
