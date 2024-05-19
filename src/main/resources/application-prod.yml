@@ -39,6 +39,22 @@ spring:
       time-to-live: 3600000
       # 缓存null值，防止缓存穿透
       cache-null-values: true
+
+# 安全配置
+security:
+  jwt:
+    key: SecretKey012345678901234567890123456789012345678901234567890123456789
+    ttl: 7200
+  ignore-urls:
+    - /v3/api-docs/**
+    - /doc.html
+    - /swagger-resources/**
+    - /webjars/**
+    - /doc.html
+    - /swagger-ui/**
+    - /swagger-ui.html
+    - /api/v1/auth/captcha
+
 mybatis-plus:
   global-config:
     db-config:
